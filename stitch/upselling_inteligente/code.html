@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+
+<html class="light" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Upselling Inteligente - MiTienda.pe</title>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Spline+Sans:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<!-- Material Icons -->
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Theme Config -->
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#f9f506",
+                        "primary-content": "#1a1a1a", // Dark text for contrast on yellow
+                        "background-light": "#f8f8f5",
+                        "background-dark": "#23220f",
+                        "surface-light": "#ffffff",
+                        "surface-dark": "#2e2d1a",
+                        "subtle-light": "#e5e5e0",
+                        "subtle-dark": "#363520",
+                    },
+                    fontFamily: {
+                        "display": ["Spline Sans", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px"},
+                    boxShadow: {
+                        'soft': '0 10px 40px -10px rgba(0,0,0,0.08)',
+                        'glow': '0 0 20px rgba(249, 245, 6, 0.4)'
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        /* Custom styles for modal backdrop simulation */
+        .glass-backdrop {
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark font-display antialiased min-h-screen relative overflow-hidden text-slate-800 dark:text-slate-100">
+<!-- Background Simulation (The "App" behind the modal) -->
+<div aria-hidden="true" class="absolute inset-0 z-0 flex flex-col p-4 opacity-30 pointer-events-none select-none overflow-hidden">
+<!-- Mock Header -->
+<div class="flex justify-between items-center mb-6">
+<div class="w-8 h-8 rounded-full bg-gray-300 dark:bg-gray-700"></div>
+<div class="font-bold text-lg">Mi Carrito</div>
+<div class="w-8 h-8 rounded-full bg-gray-300 dark:bg-gray-700"></div>
+</div>
+<!-- Mock Cart Items -->
+<div class="flex gap-4 mb-4">
+<div class="w-20 h-20 rounded-lg bg-gray-200 dark:bg-gray-800"></div>
+<div class="flex-1 space-y-2">
+<div class="h-4 w-3/4 rounded bg-gray-300 dark:bg-gray-700"></div>
+<div class="h-4 w-1/4 rounded bg-gray-300 dark:bg-gray-700"></div>
+</div>
+</div>
+<div class="flex gap-4 mb-4">
+<div class="w-20 h-20 rounded-lg bg-gray-200 dark:bg-gray-800"></div>
+<div class="flex-1 space-y-2">
+<div class="h-4 w-1/2 rounded bg-gray-300 dark:bg-gray-700"></div>
+<div class="h-4 w-1/4 rounded bg-gray-300 dark:bg-gray-700"></div>
+</div>
+</div>
+</div>
+<!-- Modal Overlay Wrapper -->
+<div class="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-4">
+<!-- Dark Overlay -->
+<div class="absolute inset-0 bg-black/60 glass-backdrop transition-opacity"></div>
+<!-- Modal Card -->
+<div class="relative w-full max-w-sm bg-surface-light dark:bg-surface-dark rounded-t-xl sm:rounded-xl shadow-soft overflow-hidden animate-in slide-in-from-bottom-10 fade-in duration-300">
+<!-- Confetti / Decoration (Subtle Top Gradient) -->
+<div class="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-primary/20 to-transparent pointer-events-none"></div>
+<!-- Close Button (Top Right) -->
+<button class="absolute top-4 right-4 z-10 p-2 rounded-full bg-white/50 dark:bg-black/20 hover:bg-white dark:hover:bg-black/40 transition-colors text-slate-500 dark:text-slate-300">
+<span class="material-icons-round text-xl">close</span>
+</button>
+<!-- Content Container -->
+<div class="relative flex flex-col items-center p-8 pt-10 text-center">
+<!-- Badge -->
+<div class="inline-flex items-center gap-1.5 px-3 py-1 mb-6 rounded-full bg-primary/20 text-yellow-700 dark:text-yellow-200 text-xs font-bold uppercase tracking-wider">
+<span class="material-icons-round text-sm">local_fire_department</span>
+                    Oferta Exclusiva
+                </div>
+<!-- Product Image Hero -->
+<div class="relative mb-6 group">
+<!-- Glow effect behind image -->
+<div class="absolute inset-0 bg-primary/30 rounded-full blur-2xl transform scale-75 group-hover:scale-100 transition-transform duration-500"></div>
+<div class="relative w-48 h-48 rounded-full border-4 border-white dark:border-surface-dark shadow-xl overflow-hidden bg-gray-100">
+<img alt="Crispy golden french fries in a red container" class="w-full h-full object-cover transform transition-transform duration-700 hover:scale-110" data-alt="Crispy golden french fries in a red paper container on a plain background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCOWngAa2edydtCWUG3IbY3npu5CATfiAbTbYcwqHPBLCRk_h0DG7z1BFkWX8I_xqBAXCtug_UCHlXkuBeR77tGFTIebvcqF97imsYiTHPsdVAkYtv1kQDKraDCaUiFqzD9Tf6DnkZ-21Hb4Xl8wz9D291Zgaapc02OtsqqLB87MGfxfjE6s6qJxIwkr91l316P8kpf5PfD1ae6Bk-J8hnW45gYRg7soOCWFx1DEIgfiBlMrX1rGXOWa3VHtqz0zcGeCeJPXAG50SY"/>
+</div>
+<!-- Floating Price Tag -->
+<div class="absolute bottom-2 right-2 bg-slate-900 text-white dark:bg-white dark:text-slate-900 px-3 py-1.5 rounded-lg shadow-lg transform rotate-3 flex flex-col items-center border-2 border-primary">
+<span class="text-[10px] uppercase font-bold opacity-80 line-through">S/ 8.90</span>
+<span class="text-lg font-bold leading-none">S/ 5.00</span>
+</div>
+</div>
+<!-- Text Content -->
+<div class="space-y-2 mb-8">
+<h2 class="text-2xl font-bold text-slate-900 dark:text-white leading-tight">
+                        ¿Un antojito extra?
+                    </h2>
+<p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed px-2">
+                        Agrega unas <strong class="text-slate-800 dark:text-slate-200">Papas Fritas Medianas</strong> a tu orden y completa tu experiencia.
+                    </p>
+</div>
+<!-- Quantity Selector (Optional Interaction) -->
+<!-- A subtle interaction to make it feel like a real choice -->
+<div class="w-full bg-subtle-light dark:bg-subtle-dark rounded-lg p-1 flex mb-6">
+<label class="flex-1 relative cursor-pointer group">
+<input class="peer sr-only" name="size" type="radio" value="regular"/>
+<div class="py-2 text-xs font-medium text-slate-500 dark:text-slate-400 rounded-md transition-all group-hover:bg-white/50 dark:group-hover:bg-white/5 peer-checked:bg-white dark:peer-checked:bg-surface-dark peer-checked:text-slate-900 dark:peer-checked:text-white peer-checked:shadow-sm">
+                            Pequeñas
+                        </div>
+</label>
+<label class="flex-1 relative cursor-pointer group">
+<input checked="" class="peer sr-only" name="size" type="radio" value="medium"/>
+<div class="py-2 text-xs font-medium text-slate-500 dark:text-slate-400 rounded-md transition-all group-hover:bg-white/50 dark:group-hover:bg-white/5 peer-checked:bg-white dark:peer-checked:bg-surface-dark peer-checked:text-slate-900 dark:peer-checked:text-white peer-checked:shadow-sm flex items-center justify-center gap-1">
+                            Medianas
+                            <span class="w-1.5 h-1.5 rounded-full bg-primary animate-pulse"></span>
+</div>
+</label>
+<label class="flex-1 relative cursor-pointer group">
+<input class="peer sr-only" name="size" type="radio" value="large"/>
+<div class="py-2 text-xs font-medium text-slate-500 dark:text-slate-400 rounded-md transition-all group-hover:bg-white/50 dark:group-hover:bg-white/5 peer-checked:bg-white dark:peer-checked:bg-surface-dark peer-checked:text-slate-900 dark:peer-checked:text-white peer-checked:shadow-sm">
+                            Grandes
+                        </div>
+</label>
+</div>
+<!-- Actions -->
+<div class="w-full space-y-3">
+<!-- Primary CTA -->
+<button class="w-full group relative flex items-center justify-center gap-3 bg-primary hover:brightness-95 active:scale-[0.98] text-primary-content font-bold py-4 px-6 rounded-full shadow-glow transition-all duration-200">
+<span class="material-icons-round text-xl">add_shopping_cart</span>
+<span>¡Sí, agregar por S/ 5.00!</span>
+<!-- Shine effect animation -->
+<div class="absolute inset-0 rounded-full overflow-hidden pointer-events-none">
+<div class="absolute top-0 left-[-100%] w-1/2 h-full bg-gradient-to-r from-transparent via-white/40 to-transparent skew-x-12 animate-[shimmer_2s_infinite]"></div>
+</div>
+</button>
+<!-- Secondary Action -->
+<button class="w-full py-3 text-sm font-medium text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200 transition-colors">
+                        No gracias, continuar al pago
+                    </button>
+</div>
+</div>
+<!-- Timer Bar (Urgency indicator at bottom) -->
+<div class="h-1.5 w-full bg-subtle-light dark:bg-subtle-dark mt-2">
+<div class="h-full bg-primary w-full origin-left animate-[shrink_15s_linear_forwards]"></div>
+</div>
+</div>
+</div>
+<!-- Animation Keyframes definition in style tag since Tailwind arbitrary values for keyframes can be verbose -->
+<style>
+        @keyframes shimmer {
+            0% { left: -100%; }
+            100% { left: 200%; }
+        }
+        @keyframes shrink {
+            0% { transform: scaleX(1); }
+            100% { transform: scaleX(0); }
+        }
+    </style>
+</body></html>

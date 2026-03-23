@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+
+<html class="light" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Confirmación y Ticket</title>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Spline+Sans:wght@300;400;500;600;700&amp;family=Noto+Sans:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Theme Configuration -->
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "primary": "#f9f506",
+              "background-light": "#f8f8f5",
+              "background-dark": "#23220f",
+              "surface-light": "#ffffff",
+              "surface-dark": "#2c2b1b",
+            },
+            fontFamily: {
+              "display": ["Spline Sans", "Noto Sans", "sans-serif"],
+              "mono": ["ui-monospace", "SFMono-Regular", "Menlo", "Monaco", "Consolas", "Liberation Mono", "Courier New", "monospace"]
+            },
+            borderRadius: {"DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        /* Custom Ticket Jagged Edge Effect using radial gradient pattern */
+        .ticket-edge {
+            background-image: radial-gradient(circle at 10px 0, transparent 10px, currentColor 11px);
+            background-size: 20px 20px;
+            background-repeat: repeat-x;
+            height: 20px;
+            width: 100%;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark font-display text-[#181811] dark:text-white overflow-x-hidden min-h-screen flex flex-col">
+<!-- Main Content Wrapper -->
+<main class="flex-1 flex flex-col items-center justify-center p-6 w-full max-w-md mx-auto relative z-10">
+<!-- Success Animation / Icon -->
+<div class="mb-6 flex flex-col items-center animate-bounce-slow">
+<div class="w-20 h-20 rounded-full bg-primary flex items-center justify-center shadow-[0_0_20px_rgba(249,245,6,0.4)] mb-4">
+<span class="material-symbols-outlined text-[#181811] text-[48px]">check</span>
+</div>
+<h1 class="text-2xl md:text-3xl font-bold text-center dark:text-white">¡Pago Exitoso!</h1>
+</div>
+<!-- Order Number Hero -->
+<div class="w-full mb-8 text-center">
+<p class="text-sm font-medium text-gray-500 dark:text-gray-400 uppercase tracking-widest mb-1">Tu número de pedido</p>
+<div class="relative inline-block">
+<span class="absolute -inset-2 rounded-xl bg-primary/20 blur-xl"></span>
+<h2 class="relative text-[80px] leading-none font-bold text-[#181811] dark:text-white tracking-tighter">
+                    #45
+                </h2>
+</div>
+</div>
+<!-- Virtual Ticket Card -->
+<div class="w-full relative filter drop-shadow-xl mb-8">
+<!-- Ticket Top -->
+<div class="bg-white dark:bg-surface-dark rounded-t-xl p-6 pb-4 relative z-10">
+<div class="flex justify-between items-start mb-6">
+<div class="flex flex-col">
+<span class="text-lg font-bold text-[#181811] dark:text-white">MiTienda.pe</span>
+<span class="text-xs text-gray-500 dark:text-gray-400">Kiosco 03 • Miraflores</span>
+</div>
+<div class="bg-gray-100 dark:bg-gray-800 p-2 rounded-lg">
+<span class="material-symbols-outlined text-gray-400 dark:text-gray-500">qr_code_2</span>
+</div>
+</div>
+<div class="space-y-3 font-mono text-sm border-t border-dashed border-gray-300 dark:border-gray-700 pt-4">
+<div class="flex justify-between text-gray-600 dark:text-gray-300">
+<span>1x Combo Hamburguesa</span>
+<span class="font-medium">S/ 24.90</span>
+</div>
+<div class="flex justify-between text-gray-600 dark:text-gray-300">
+<span>1x Gaseosa Mediana</span>
+<span class="font-medium">S/ 5.00</span>
+</div>
+<div class="flex justify-between text-gray-600 dark:text-gray-300">
+<span>1x Papas Fritas</span>
+<span class="font-medium">S/ 8.00</span>
+</div>
+</div>
+<div class="mt-6 pt-4 border-t-2 border-[#181811] dark:border-white flex justify-between items-end">
+<div class="flex flex-col">
+<span class="text-xs text-gray-500">Total Pagado</span>
+<span class="text-xs text-gray-500">12 Oct, 14:30 PM</span>
+</div>
+<span class="text-2xl font-bold text-[#181811] dark:text-white">S/ 37.90</span>
+</div>
+</div>
+<!-- Ticket Jagged Bottom Simulation -->
+<!-- We simulate the jagged edge by using small circles (radial gradients) clipped at the bottom of a container -->
+<div class="h-4 w-full bg-white dark:bg-surface-dark relative overflow-hidden">
+<div class="absolute bottom-0 w-full h-2 flex justify-between items-end overflow-hidden">
+<!-- Creating a simple jagged pattern with CSS borders for broader compatibility if gradients fail, or simplified approach -->
+<div class="w-full h-full" style="background: radial-gradient(circle, transparent 50%, inherit 50%) repeat-x bottom left/16px 16px; background-color: transparent;"></div>
+</div>
+</div>
+<!-- Alternative easier jagged edge visually: Just a row of triangles (clip-path) or rounded bottom -->
+<div class="w-full h-3 bg-white dark:bg-surface-dark" style="clip-path: polygon(0% 0%, 0% 100%, 2% 0%, 4% 100%, 6% 0%, 8% 100%, 10% 0%, 12% 100%, 14% 0%, 16% 100%, 18% 0%, 20% 100%, 22% 0%, 24% 100%, 26% 0%, 28% 100%, 30% 0%, 32% 100%, 34% 0%, 36% 100%, 38% 0%, 40% 100%, 42% 0%, 44% 100%, 46% 0%, 48% 100%, 50% 0%, 52% 100%, 54% 0%, 56% 100%, 58% 0%, 60% 100%, 62% 0%, 64% 100%, 66% 0%, 68% 100%, 70% 0%, 72% 100%, 74% 0%, 76% 100%, 78% 0%, 80% 100%, 82% 0%, 84% 100%, 86% 0%, 88% 100%, 90% 0%, 92% 100%, 94% 0%, 96% 100%, 98% 0%, 100% 100%, 100% 0%); margin-top: -1px;"></div>
+</div>
+<!-- Footer / Countdown -->
+<div class="w-full mt-auto pt-6 flex flex-col gap-4">
+<div class="flex flex-col gap-2">
+<div class="flex justify-between items-end px-1">
+<p class="text-sm font-medium text-gray-600 dark:text-gray-300">Volviendo al inicio...</p>
+<p class="text-sm font-bold text-primary dark:text-primary">5s</p>
+</div>
+<!-- Progress Bar -->
+<div class="h-2 w-full bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
+<div class="h-full bg-primary rounded-full" style="width: 85%"></div>
+</div>
+</div>
+<!-- Manual Exit Button -->
+<button class="w-full py-4 bg-[#181811] dark:bg-white text-white dark:text-[#181811] rounded-full font-bold text-lg hover:opacity-90 transition-opacity flex items-center justify-center gap-2 group shadow-lg">
+<span class="material-symbols-outlined group-hover:rotate-12 transition-transform">add_circle</span>
+                Iniciar nuevo pedido
+            </button>
+</div>
+</main>
+<!-- Background decorative element for flavor -->
+<div class="fixed top-0 left-0 w-full h-64 bg-gradient-to-b from-primary/5 to-transparent pointer-events-none z-0"></div>
+</body></html>

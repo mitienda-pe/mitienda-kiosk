@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+
+<html class="light" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>MiTienda.pe - Kiosco</title>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Theme Configuration -->
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#f9f506",
+                        "background-light": "#f8f8f5",
+                        "background-dark": "#23220f",
+                    },
+                    fontFamily: {
+                        "display": ["Spline Sans", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<!-- Google Fonts: Spline Sans -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Spline+Sans:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        /* Custom styles to ensure full height and smooth scrolling */
+        body {
+            font-family: "Spline Sans", sans-serif;
+        }
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark text-[#181811] dark:text-white transition-colors duration-200">
+<div class="relative flex h-full min-h-screen w-full flex-col overflow-x-hidden">
+<!-- TopAppBar -->
+<header class="flex items-center px-6 py-4 justify-between sticky top-0 z-10 bg-background-light/95 dark:bg-background-dark/95 backdrop-blur-sm">
+<div class="text-[#181811] dark:text-white flex size-12 shrink-0 items-center justify-center rounded-full bg-white dark:bg-[#343215] shadow-sm">
+<span class="material-symbols-outlined text-[24px]">storefront</span>
+</div>
+<h2 class="text-[#181811] dark:text-white text-xl font-bold leading-tight tracking-[-0.015em] flex-1 text-center pr-12 font-display">
+                MiTienda.pe
+            </h2>
+</header>
+<!-- HeadlineText -->
+<section class="flex flex-col items-center justify-center pt-8 pb-4 px-6">
+<h1 class="text-[#181811] dark:text-white tracking-tight text-[36px] font-bold leading-[1.1] text-center font-display">
+                ¿Cómo deseas<br/>tu pedido?
+            </h1>
+<p class="text-[#181811]/60 dark:text-white/60 text-lg text-center mt-2 font-display">
+                How would you like your order?
+            </p>
+</section>
+<!-- ImageGrid (Service Selection) -->
+<section class="flex-1 flex flex-col justify-center px-4 py-6">
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-4 h-full min-h-[400px]">
+<!-- Card 1: Comer aquí -->
+<div class="group relative flex flex-col justify-end p-6 rounded-xl overflow-hidden cursor-pointer shadow-sm hover:shadow-md transition-all active:scale-[0.98] border border-transparent hover:border-primary/50 h-full">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105" data-alt="A cozy restaurant table setting with plates and glasses for dining in" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCOlS3lz8kg71a_tOMjFUOWNy97SCkbl_9uQCV__h39279RNzsNKYXPZKKLcNtYNMz9g3O1dqGhvYxwyaUscPnM5qbkM2LQZD5YHnOPTxhZl9t8iooHFMeFBaCvUDIspLkhz3rb_U6e4BV8UXhAIlR5vmt1YKXlWgxfuXOtS4nUtvgSuCgl2LHhYxVbh1PatMbKacRqvqwSPFa9Pa2-lgzK7uhyI_LhgCDf8ACZSQEiArOFu57QuIzLyiF-4Imk-JESn36aBqe22Gs");'>
+</div>
+<!-- Gradient overlay for text readability -->
+<div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+<div class="relative z-10 flex flex-col gap-1 items-start">
+<div class="bg-primary text-black p-2 rounded-full mb-2">
+<span class="material-symbols-outlined text-[28px]">restaurant</span>
+</div>
+<h3 class="text-white text-3xl font-bold leading-tight font-display">Comer aquí</h3>
+<p class="text-white/80 text-lg font-medium font-display">Eat in</p>
+</div>
+</div>
+<!-- Card 2: Para llevar -->
+<div class="group relative flex flex-col justify-end p-6 rounded-xl overflow-hidden cursor-pointer shadow-sm hover:shadow-md transition-all active:scale-[0.98] border border-transparent hover:border-primary/50 h-full">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105" data-alt="A paper takeout bag with fresh food ready to go" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAxScgEnei3fyBspMNuNheNcSsl1ca2fJaI1_zAbItZ2bo9b2kxzGesHShOpc6f6dDelF2bDbBRTbYbKO3AWcNhf6zLqHTEXgYxmjOUasqwTh80yMvGCdTJU6Nurvpr9A54ZV_sKsv4PkiHpyTIUSodKaTc9Ya_w6XrQt8IayK7OcS_xRIIDuWyYKzixXyMmehVjK5R0E7qRLyd76XpIT4Y7uY0F82lw323Cer9bh1MtH1r_YnACIoHw_IPOd31xGtffitJMqELiGA");'>
+</div>
+<!-- Gradient overlay -->
+<div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+<div class="relative z-10 flex flex-col gap-1 items-start">
+<div class="bg-white text-black p-2 rounded-full mb-2">
+<span class="material-symbols-outlined text-[28px]">shopping_bag</span>
+</div>
+<h3 class="text-white text-3xl font-bold leading-tight font-display">Para llevar</h3>
+<p class="text-white/80 text-lg font-medium font-display">Take out</p>
+</div>
+</div>
+</div>
+</section>
+<!-- TitleText + AvatarGroup (Language) -->
+<section class="mt-auto bg-white dark:bg-[#2a2912] rounded-t-xl shadow-[0_-4px_20px_rgba(0,0,0,0.05)] pb-8">
+<h2 class="text-[#181811] dark:text-white text-lg font-bold leading-tight tracking-[-0.015em] px-4 text-center pt-6 pb-4 font-display">
+                Selecciona tu idioma / Select your language
+            </h2>
+<div class="flex items-center gap-8 px-4 justify-center">
+<!-- Spanish Option -->
+<button class="flex flex-col items-center gap-2 group focus:outline-none">
+<div class="relative overflow-hidden w-20 h-20 rounded-full border-4 border-[#f5f5f0] dark:border-[#343215] group-hover:border-primary group-focus:border-primary transition-colors shadow-sm">
+<div class="w-full h-full bg-center bg-no-repeat bg-cover" data-alt="Flag of Peru representing Spanish language" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuC21MYRD0IA5wcyekzLCNuXipZY47jKRqGPdE6kQMbtYbPK8Nhgo2ngkLFzGxqXIS1ZSYz_7v84sN4uye-gs8QyDfBjNYV4vIZRufuNfi74nQpFO95tRLPeO12MZs3bQjLggxe9iySug1CVGnxc4eZc_kgiO7ed4zG58g5FIhSXvSYXc_RUjnnKTsYqDvmY8YFlXjLi14oRM-fEaeRDus8IHHCLa66SZ1Y6WQg3ymmnwVevUKN3Cw73JZgSJzvGcwvTlEBn2x7ps4A");'>
+</div>
+</div>
+<span class="text-sm font-bold text-[#181811] dark:text-white group-hover:text-primary-dark transition-colors">Español</span>
+</button>
+<!-- English Option -->
+<button class="flex flex-col items-center gap-2 group focus:outline-none">
+<div class="relative overflow-hidden w-20 h-20 rounded-full border-4 border-[#f5f5f0] dark:border-[#343215] group-hover:border-primary group-focus:border-primary transition-colors shadow-sm">
+<div class="w-full h-full bg-center bg-no-repeat bg-cover" data-alt="Flag of USA representing English language" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuD4Et3gNxRxy9eQRNV1s-2GbDiH4kJXO1RSRtQemeARjJCrG4drePKqMZfJ4Be5axz0g4WsIeWCH8-_he9LanGil-_d9Xgk71azfnQ2hgYz_jJjx62V057pD_IGUzmndy_camKYvjfnX0z9i22ptZuNKyMKxrTk10GAZkuZ6vhkncXF-7MQn7SeJjHCrirPYOZSKJCfUy3zEf2PXCURPc0oXj0RwEAHV2F5XLOYfo3vZodW0xeXd1YjGBs1bQmHKJxPie7OxRRiPz0");'>
+</div>
+</div>
+<span class="text-sm font-bold text-[#181811] dark:text-white group-hover:text-primary-dark transition-colors">English</span>
+</button>
+</div>
+<div class="h-6"></div>
+</section>
+</div>
+</body></html>

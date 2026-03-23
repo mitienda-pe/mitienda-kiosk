@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+
+<html class="light" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Personalización de Producto</title>
+<link href="https://fonts.googleapis.com/css2?family=Spline+Sans:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#f9f506",
+                        "background-light": "#f8f8f5",
+                        "background-dark": "#23220f",
+                        "surface-light": "#ffffff",
+                        "surface-dark": "#2d2c1b",
+                    },
+                    fontFamily: {
+                        "display": ["Spline Sans", "sans-serif"],
+                        "body": ["Noto Sans", "sans-serif"],
+                    },
+                    borderRadius: {"DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark font-display text-[#181811] dark:text-white antialiased overflow-hidden">
+<div class="relative flex h-full h-screen w-full flex-col group/design-root overflow-hidden">
+<!-- Header / Top Bar -->
+<div class="flex items-center bg-background-light dark:bg-background-dark p-4 pb-2 justify-between shrink-0 z-10">
+<h2 class="text-[#181811] dark:text-white text-2xl font-bold leading-tight tracking-[-0.015em] flex-1">Personalizar</h2>
+<button class="flex size-12 shrink-0 items-center justify-center rounded-full bg-black/5 dark:bg-white/10 hover:bg-black/10 dark:hover:bg-white/20 transition-colors">
+<span class="material-symbols-outlined text-[#181811] dark:text-white" style="font-size: 28px;">close</span>
+</button>
+</div>
+<!-- Scrollable Content -->
+<div class="flex-1 overflow-y-auto pb-32 no-scrollbar">
+<!-- Hero Image -->
+<div class="@container px-4 py-2">
+<div class="w-full bg-center bg-no-repeat bg-cover flex flex-col justify-end overflow-hidden bg-surface-light dark:bg-surface-dark rounded-xl aspect-[16/9] shadow-sm relative" data-alt="Juicy gourmet burger with lettuce cheese and tomato on a wooden board" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuByUMN1yv9p8SYWXUElny-kCYfxpcE0sj9SmjwNiLOg03kHSHwzBIpnUOLVCwEI2SOEepIvxck0PT_OKGmZ2pLx4HC3-hNZsFI8wPLVhZjbvjYSXOAAXseYGg0iXEpFEXbK3xr513jnzywjZU_cEOXlSeTw5KCjytgtGtG7NvnwcDlvw3Ynxtppa6YKJmRb4WIiDYky45OS9nkzt-xjdzVq1e5OuNUv4CJsFuZUlmddXG7prhN9BDbQwGx-ITnAvyLD8mKc82_W0mw");'>
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+</div>
+</div>
+<!-- Product Title & Base Price -->
+<div class="px-4 pb-2 pt-4 flex flex-col gap-1">
+<div class="flex justify-between items-start">
+<h1 class="text-[#181811] dark:text-white tracking-tight text-[32px] font-bold leading-tight">Hamburguesa Royal</h1>
+<span class="text-[#181811] dark:text-white text-[24px] font-bold leading-tight bg-primary rounded-lg px-3 py-1 mt-1">S/ 18.00</span>
+</div>
+<p class="text-gray-500 dark:text-gray-400 text-sm leading-normal">Carne artesanal de 180g, queso cheddar, huevo, tocino y ensalada fresca.</p>
+</div>
+<div class="h-px bg-black/5 dark:bg-white/10 mx-4 my-4"></div>
+<!-- Section: Remove Ingredients -->
+<div class="px-4">
+<h3 class="text-[#181811] dark:text-white text-lg font-bold leading-tight tracking-[-0.015em] pb-4">Ingredientes <span class="text-sm font-normal text-gray-500 dark:text-gray-400 ml-2">(Toca para quitar)</span></h3>
+<div class="grid grid-cols-2 gap-3">
+<!-- Item 1: Active -->
+<button class="relative flex flex-col items-center p-3 rounded-xl bg-surface-light dark:bg-surface-dark shadow-sm border-2 border-transparent active:scale-95 transition-transform">
+<div class="w-full aspect-[4/3] bg-center bg-contain bg-no-repeat mb-2 rounded-lg" data-alt="Fresh green lettuce leaf" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAqp0w4zKzi_rLKgrTtV-LVoeBKFud_pls3JGvL1XPLv76OEY10bSrQ58mvWqHejTXPeaZ1SE682aE7xDcYEXAfhG1WjMKWLvlyC_rE3yoJJ7pT4HwMXR-xQ8pGUTM_-w5QqRgBb8z7nRQ3nSq9eJyFgki2Gu4VwFazZdlFZspErK4bodkBL81y8zigVWcxQuVVqr78B-zbEkHKRizn5Ip3Jw3MpsiRHy1Q7Qfs5_o0_UoFwbmYhlpTtLtgtKp5Vz0X_CsNdTj_-Kk");'></div>
+<span class="font-medium text-sm text-center dark:text-white">Lechuga</span>
+</button>
+<!-- Item 2: Active -->
+<button class="relative flex flex-col items-center p-3 rounded-xl bg-surface-light dark:bg-surface-dark shadow-sm border-2 border-transparent active:scale-95 transition-transform">
+<div class="w-full aspect-[4/3] bg-center bg-contain bg-no-repeat mb-2 rounded-lg" data-alt="Slice of red ripe tomato" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBFnAGlKsHWgsu5NPNMqE_GH-4YH2IxVr3Z-lUuUZztR4p0uuVc87qJAqqTpENN1U9_uKgszrYZKdv_DWhKjnSaP1CibtvMRJwbB6iufiFvCRwgLL3dyAigx9-yE88b15KhvfhR4hk0FuRpKFtQW953RX1KuvAIrIzap67zA943llj7daxXBE-Lxjc4TN-j4Ac6U5dIXpyFG--cmUeQgEx8NtroBg0hU_JQyR6bFfI6ESM2ljfDJo1_M2GxytbW7GsKdQ7TkPLkldo");'></div>
+<span class="font-medium text-sm text-center dark:text-white">Tomate</span>
+</button>
+<!-- Item 3: Removed State -->
+<button class="relative flex flex-col items-center p-3 rounded-xl bg-surface-light dark:bg-surface-dark shadow-sm border-2 border-red-100 dark:border-red-900/30 active:scale-95 transition-transform overflow-hidden group">
+<!-- Overlay for removed state -->
+<div class="absolute inset-0 bg-white/70 dark:bg-black/60 z-10 flex items-center justify-center">
+<div class="bg-red-500 rounded-full p-2 shadow-lg">
+<span class="material-symbols-outlined text-white block" style="font-size: 32px; font-weight: 700;">close</span>
+</div>
+</div>
+<div class="w-full aspect-[4/3] bg-center bg-contain bg-no-repeat mb-2 rounded-lg grayscale opacity-50" data-alt="Slice of yellow cheddar cheese" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBCph3rlyx8-uNMuEbXSpdMdnqTecHAlj7_lauOCIj24PEw1DFUkQFnH801nnynkyIR6Zr4cmCnG_NIPsTtPyONSxdi67cgyu0cdbY8G7e1M8xs4raGb35tHoR7OvjY50tveL7VYzlT_NiJeFolKKE74goMDFv8nD8UqbGUg9L816vj5Ut4IB6mFqb1BoHClSzs9Ue6sbIN4hOFK5pG75T-221ccr1lMcoGiBpq7sHB5_mGa-mpdf81mx5JSv7lnvHhaseZ9ZxKhYs");'></div>
+<span class="font-medium text-sm text-center text-gray-400 decoration-line-through">Queso</span>
+</button>
+<!-- Item 4: Active -->
+<button class="relative flex flex-col items-center p-3 rounded-xl bg-surface-light dark:bg-surface-dark shadow-sm border-2 border-transparent active:scale-95 transition-transform">
+<div class="w-full aspect-[4/3] bg-center bg-contain bg-no-repeat mb-2 rounded-lg" data-alt="Red onion slices" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDIQhUCQYYKWMb7RLMGFlObl-Jdqywrk-6JcIKePlwkKngCvdSbJYTRaZc0kdYK27FIRqxpEbd8XE5z8YvykqWxMCKDowHwu7a0Vxfba1e5rmO2dFjKLsMWhefB8vGPMHoBYQpRMtrj63uc_dFT-zesytQ8wo2499jmmg9ySE-ZQmXeCStIU5m1GOQwD5O0JtTN9GOEIlAf_1I-tScPQeLlPKEwcfBvfExJeQnKYMGNJZOxbjMZtAJ73---Y497d5aMlMrvHy3LWkE");'></div>
+<span class="font-medium text-sm text-center dark:text-white">Cebolla</span>
+</button>
+</div>
+</div>
+<div class="h-px bg-black/5 dark:bg-white/10 mx-4 my-6"></div>
+<!-- Section: Add Extras -->
+<div class="px-4">
+<h3 class="text-[#181811] dark:text-white text-lg font-bold leading-tight tracking-[-0.015em] pb-4">Extras <span class="text-sm font-normal text-gray-500 dark:text-gray-400 ml-2">(Costo adicional)</span></h3>
+<div class="flex flex-col gap-3">
+<!-- Extra Item 1 -->
+<div class="flex items-center justify-between bg-surface-light dark:bg-surface-dark p-4 rounded-xl shadow-sm">
+<div class="flex items-center gap-3">
+<div class="size-12 rounded-lg bg-cover bg-center bg-no-repeat bg-gray-100 dark:bg-gray-800" data-alt="Crispy bacon strips" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuD5p7a4tNpDY4RGiVZ0uBeO6EM76px1xFt9CAv4w2si3k3AclNvFpo_VQrw1312nzMbvGXjmQzmR8wln9DadVWkMQBV39WGCqiYjsrcTQdvvNNBs-tVW-LkyqAp0AF3xEKeG9Ceror6xbk3jSGGXmM5onz7qftQiKYNC1RkdYdUctbe7a3EBywFN5dAtFAUvnqPMIBTY6FepC444u5AUYiyVIfCqxn0wL6qj8tL2e94yMURm13Q24bXBjkXfgF6JGXDROuiYkiLVqQ");'></div>
+<div>
+<h4 class="font-bold text-[#181811] dark:text-white leading-tight">Tocino</h4>
+<p class="text-sm font-medium text-gray-500 dark:text-gray-400">+ S/ 3.00</p>
+</div>
+</div>
+<div class="flex items-center bg-background-light dark:bg-background-dark rounded-full p-1 border border-black/5 dark:border-white/10">
+<button class="size-10 flex items-center justify-center rounded-full bg-white dark:bg-white/5 shadow-sm text-gray-500 disabled:opacity-50 active:scale-90 transition-transform">
+<span class="material-symbols-outlined text-lg">remove</span>
+</button>
+<span class="w-8 text-center font-bold text-lg tabular-nums">0</span>
+<button class="size-10 flex items-center justify-center rounded-full bg-primary text-black shadow-sm active:scale-90 transition-transform">
+<span class="material-symbols-outlined text-lg">add</span>
+</button>
+</div>
+</div>
+<!-- Extra Item 2: Selected Example -->
+<div class="flex items-center justify-between bg-surface-light dark:bg-surface-dark p-4 rounded-xl shadow-sm ring-2 ring-primary ring-opacity-50">
+<div class="flex items-center gap-3">
+<div class="size-12 rounded-lg bg-cover bg-center bg-no-repeat bg-gray-100 dark:bg-gray-800" data-alt="Fried egg" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCDyfK-el_WNPP5eFAJwPFVYXfT-Kd6Ue8Ww46Iwlwe56jrkf6T42rAJnLC3_3omu-aAnYzCKvTSUXQ3AMg-EAxQVOfnJXYUdUyaxJ9k3ANbEg28smxt1OVvKoRSTkdJGepFEP4pGd7nOk_Ztyb3rd5f2ahtpPc3B0PgAwyQyfnj8OovQHsZykxF0_qiWTk0hE5poG5t-7jBeiLy4zWTeAoifywnCGS2TnMcVN90edzk4caCVtpei3skyaDjilU72eCDcJ9z3B0E0I");'></div>
+<div>
+<h4 class="font-bold text-[#181811] dark:text-white leading-tight">Huevo Extra</h4>
+<p class="text-sm font-medium text-primary dark:text-primary brightness-90">+ S/ 2.00</p>
+</div>
+</div>
+<div class="flex items-center bg-background-light dark:bg-background-dark rounded-full p-1 border border-black/5 dark:border-white/10">
+<button class="size-10 flex items-center justify-center rounded-full bg-white dark:bg-white/5 shadow-sm text-black dark:text-white active:scale-90 transition-transform">
+<span class="material-symbols-outlined text-lg">remove</span>
+</button>
+<span class="w-8 text-center font-bold text-lg tabular-nums">1</span>
+<button class="size-10 flex items-center justify-center rounded-full bg-primary text-black shadow-sm active:scale-90 transition-transform">
+<span class="material-symbols-outlined text-lg">add</span>
+</button>
+</div>
+</div>
+<!-- Extra Item 3 -->
+<div class="flex items-center justify-between bg-surface-light dark:bg-surface-dark p-4 rounded-xl shadow-sm">
+<div class="flex items-center gap-3">
+<div class="size-12 rounded-lg bg-cover bg-center bg-no-repeat bg-gray-100 dark:bg-gray-800" data-alt="French fries" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCRgjIPxn371YD5uH2NhQcIm-iRn-E0GuAK1h9aLErSqMqkcI6v39A3hjts5BpiJ1_mMUAuicgk5Gaipeh3SEgGXSaMPZJYUAxIe_hjz0z6tOUYhabd7slcyQ6x5eOTUsiRcRJu0SvWBsONXrdUSfTyUuw4ygP-znj3g-sqGdBqYAfjAiLCLOLS5FiJawWmLpFukvTnDK9Y2ogIggD36cK6hqfW65e9-tta3Tq2TZbTqFWsqTXn9Wyet8B4KWdqBBLtnUn0HtVaYZE");'></div>
+<div>
+<h4 class="font-bold text-[#181811] dark:text-white leading-tight">Papas Extra</h4>
+<p class="text-sm font-medium text-gray-500 dark:text-gray-400">+ S/ 4.50</p>
+</div>
+</div>
+<div class="flex items-center bg-background-light dark:bg-background-dark rounded-full p-1 border border-black/5 dark:border-white/10">
+<button class="size-10 flex items-center justify-center rounded-full bg-white dark:bg-white/5 shadow-sm text-gray-500 disabled:opacity-50 active:scale-90 transition-transform">
+<span class="material-symbols-outlined text-lg">remove</span>
+</button>
+<span class="w-8 text-center font-bold text-lg tabular-nums">0</span>
+<button class="size-10 flex items-center justify-center rounded-full bg-primary text-black shadow-sm active:scale-90 transition-transform">
+<span class="material-symbols-outlined text-lg">add</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Spacer for bottom bar -->
+<div class="h-6"></div>
+</div>
+<!-- Sticky Footer -->
+<div class="absolute bottom-0 left-0 w-full bg-surface-light dark:bg-surface-dark border-t border-black/5 dark:border-white/5 p-4 z-50 shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.1)]">
+<button class="w-full bg-primary hover:bg-[#eae605] active:bg-[#dcd804] text-[#181811] font-bold text-xl py-4 rounded-full flex items-center justify-between px-6 shadow-lg transition-colors group">
+<span>Agregar al pedido</span>
+<div class="flex items-center gap-2">
+<span class="text-base font-normal opacity-80 border-r border-black/20 pr-2 mr-1">1 item</span>
+<span class="tabular-nums">S/ 20.00</span>
+</div>
+</button>
+</div>
+</div>
+</body></html>

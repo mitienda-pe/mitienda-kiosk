@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+
+<html class="light" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>MiTienda.pe - Kiosco</title>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Spline+Sans:wght@300;400;500;600;700&amp;family=Noto+Sans:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .material-symbols-outlined.filled {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        /* Custom scrollbar hiding for clean UI */
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#f9f506",
+                        "background-light": "#f8f8f5",
+                        "background-dark": "#1a1a15",
+                        "surface-light": "#ffffff",
+                        "surface-dark": "#23220f",
+                        "text-main": "#181811",
+                    },
+                    fontFamily: {
+                        "display": ["Spline Sans", "sans-serif"],
+                        "body": ["Noto Sans", "sans-serif"],
+                    },
+                    borderRadius: {"DEFAULT": "1rem", "lg": "1.5rem", "xl": "2rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark font-display text-text-main dark:text-white antialiased transition-colors duration-200">
+<div class="relative flex h-full min-h-screen w-full flex-col overflow-x-hidden pb-[140px]">
+<!-- Header -->
+<header class="sticky top-0 z-40 bg-background-light/95 dark:bg-background-dark/95 backdrop-blur-md pt-4 px-4 pb-2 border-b border-gray-100 dark:border-gray-800">
+<div class="flex items-center justify-between gap-4">
+<button class="flex size-10 items-center justify-center rounded-full bg-white dark:bg-surface-dark shadow-sm text-text-main dark:text-white">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<div class="flex-1 flex flex-col items-center">
+<h2 class="text-lg font-bold leading-tight tracking-tight">MiTienda.pe</h2>
+<span class="text-xs text-gray-500 dark:text-gray-400 font-medium">Sucursal Miraflores</span>
+</div>
+<button class="flex size-10 items-center justify-center rounded-full bg-white dark:bg-surface-dark shadow-sm text-text-main dark:text-white">
+<span class="material-symbols-outlined">search</span>
+</button>
+</div>
+<!-- Categories Scroller -->
+<div class="mt-4 flex gap-3 overflow-x-auto hide-scrollbar pb-2">
+<!-- Active Category -->
+<button class="flex h-10 shrink-0 items-center justify-center gap-x-2 rounded-full bg-primary pl-4 pr-6 shadow-sm transition-transform active:scale-95">
+<span class="material-symbols-outlined text-text-main">lunch_dining</span>
+<p class="text-text-main text-sm font-bold">Hamburguesas</p>
+</button>
+<!-- Inactive Categories -->
+<button class="flex h-10 shrink-0 items-center justify-center gap-x-2 rounded-full bg-white dark:bg-surface-dark pl-4 pr-6 shadow-sm border border-transparent dark:border-gray-700 transition-transform active:scale-95">
+<span class="material-symbols-outlined text-gray-500 dark:text-gray-300">local_bar</span>
+<p class="text-gray-700 dark:text-gray-200 text-sm font-medium">Bebidas</p>
+</button>
+<button class="flex h-10 shrink-0 items-center justify-center gap-x-2 rounded-full bg-white dark:bg-surface-dark pl-4 pr-6 shadow-sm border border-transparent dark:border-gray-700 transition-transform active:scale-95">
+<span class="material-symbols-outlined text-gray-500 dark:text-gray-300">restaurant</span>
+<p class="text-gray-700 dark:text-gray-200 text-sm font-medium">Combos</p>
+</button>
+<button class="flex h-10 shrink-0 items-center justify-center gap-x-2 rounded-full bg-white dark:bg-surface-dark pl-4 pr-6 shadow-sm border border-transparent dark:border-gray-700 transition-transform active:scale-95">
+<span class="material-symbols-outlined text-gray-500 dark:text-gray-300">icecream</span>
+<p class="text-gray-700 dark:text-gray-200 text-sm font-medium">Postres</p>
+</button>
+<button class="flex h-10 shrink-0 items-center justify-center gap-x-2 rounded-full bg-white dark:bg-surface-dark pl-4 pr-6 shadow-sm border border-transparent dark:border-gray-700 transition-transform active:scale-95">
+<span class="material-symbols-outlined text-gray-500 dark:text-gray-300">takeout_dining</span>
+<p class="text-gray-700 dark:text-gray-200 text-sm font-medium">Snacks</p>
+</button>
+</div>
+</header>
+<!-- Main Content Grid -->
+<main class="p-4 w-full max-w-2xl mx-auto">
+<div class="mb-4 flex items-center justify-between">
+<h3 class="text-xl font-bold text-text-main dark:text-white">Lo más pedido</h3>
+<a class="text-sm font-medium text-gray-500 dark:text-primary hover:text-text-main dark:hover:text-white transition-colors" href="#">Ver todo</a>
+</div>
+<!-- Product Grid -->
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+<!-- Product Card 1 -->
+<div class="group relative flex flex-col overflow-hidden rounded-xl bg-white dark:bg-surface-dark shadow-sm hover:shadow-md transition-shadow">
+<div class="relative aspect-[4/3] w-full overflow-hidden bg-gray-100 dark:bg-gray-800">
+<img alt="Juicy beef burger with cheese and lettuce on a wooden board" class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105" data-alt="Juicy beef burger with cheese and lettuce on a wooden board" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAzKngI4U25L0aJn6QAna0mYVcY9naUFj30lmDSTg-UKMlCaZ5FzwuMZH7U-6e81ewOkjW5oz9YoIkD4Kxv0HBVR97kvTHsv4DRE7cucwlyQLkb9RBtXvwd9yNVPh7GPGZQTopatmonHYewyySUmFjTd0SlwmDPrBiqGduPE2ulBP-iXtz3Qz-KVXkYuFSH0Kq9bZ9BaX0HHziGoNu7aFB-LEchOjps4fst2X52yhyocooz5K2OyIL3g_KpfjMG8G_FHg4btVOjnxw"/>
+<!-- Customize Badge -->
+<button class="absolute top-3 right-3 flex size-8 items-center justify-center rounded-full bg-white/90 backdrop-blur text-text-main shadow-sm hover:bg-primary transition-colors">
+<span class="material-symbols-outlined text-[18px]">tune</span>
+</button>
+</div>
+<div class="flex flex-1 flex-col p-4">
+<div class="flex-1">
+<div class="flex justify-between items-start gap-2">
+<h4 class="text-lg font-bold text-text-main dark:text-white leading-tight">Hamburguesa Royal</h4>
+</div>
+<p class="mt-1 text-sm text-gray-500 dark:text-gray-400 line-clamp-2">Carne angus, huevo frito, queso cheddar y papas al hilo.</p>
+</div>
+<div class="mt-4 flex items-center justify-between gap-3">
+<span class="text-xl font-bold text-text-main dark:text-white">S/ 18.90</span>
+<button class="flex h-10 items-center justify-center gap-2 rounded-full bg-primary px-5 text-sm font-bold text-text-main shadow-sm transition-transform active:scale-95 hover:bg-[#ebe705]">
+<span class="material-symbols-outlined text-[20px]">add</span>
+                                Agregar
+                            </button>
+</div>
+</div>
+</div>
+<!-- Product Card 2 -->
+<div class="group relative flex flex-col overflow-hidden rounded-xl bg-white dark:bg-surface-dark shadow-sm hover:shadow-md transition-shadow">
+<div class="relative aspect-[4/3] w-full overflow-hidden bg-gray-100 dark:bg-gray-800">
+<img alt="Two glasses of refreshing iced soda with lime slices" class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105" data-alt="Two glasses of refreshing iced soda with lime slices" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDfNSbSdf1gfLNpEZAv0rHO1sMG7RafKd8oCPAtC35viKafpUdOZfRx8sS2ffgaz18kgV6Il6CkeElwYwPnTaQy5x81IBVHzc9wnXF9yUobmi_1yEJgjd6Zj1hvs22xjh7JbZAQRpYWys37nlGr_dQEHEaexWqHb0aVbgeS21rBSmwa9M2DNyYiiSmlAwfw1KjZImPe-GFzi8BtGQGZDIsdNSLLgtveQytROtKoPYIg6N9Md48fUkgVE0P1LB1Ac3aRRf4mAexoMd4"/>
+</div>
+<div class="flex flex-1 flex-col p-4">
+<div class="flex-1">
+<h4 class="text-lg font-bold text-text-main dark:text-white leading-tight">Inka Kola 500ml</h4>
+<p class="mt-1 text-sm text-gray-500 dark:text-gray-400 line-clamp-2">Bebida gasificada sabor nacional, bien helada.</p>
+</div>
+<div class="mt-4 flex items-center justify-between gap-3">
+<span class="text-xl font-bold text-text-main dark:text-white">S/ 4.50</span>
+<button class="flex h-10 items-center justify-center gap-2 rounded-full bg-primary px-5 text-sm font-bold text-text-main shadow-sm transition-transform active:scale-95 hover:bg-[#ebe705]">
+<span class="material-symbols-outlined text-[20px]">add</span>
+                                Agregar
+                            </button>
+</div>
+</div>
+</div>
+<!-- Product Card 3 -->
+<div class="group relative flex flex-col overflow-hidden rounded-xl bg-white dark:bg-surface-dark shadow-sm hover:shadow-md transition-shadow">
+<div class="relative aspect-[4/3] w-full overflow-hidden bg-gray-100 dark:bg-gray-800">
+<img alt="Family combo meal with burgers fries and drinks on table" class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105" data-alt="Family combo meal with burgers fries and drinks on table" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBtunzC2yVxSftPDYiAfyhI5a6m69fYgn2xUbW2CKQ0BdyE9WPum_pVYarhpIEpWHQ9IXydry_dyGDKIsGvlfQ1Wr8SSmBqhk9v4N4vH02XDeJ4R8gHqsIRXwelH_Wtvmi9Imab8W7osdi9sMiW8Gp3jCTescefzpVdwMz4xjf2wcpdPGi5y1tTUgb0ARyIYP23X1RmueI582UC1JUpF29neX8e5RooEcoTi7FCyVx4AFXPIu9EAKQpjJIRIS45vIGSl9vMeAg3K4w"/>
+<div class="absolute top-3 left-3 rounded-full bg-black/70 px-3 py-1 text-xs font-bold text-white backdrop-blur-sm">
+                            POPULAR
+                        </div>
+<button class="absolute top-3 right-3 flex size-8 items-center justify-center rounded-full bg-white/90 backdrop-blur text-text-main shadow-sm hover:bg-primary transition-colors">
+<span class="material-symbols-outlined text-[18px]">tune</span>
+</button>
+</div>
+<div class="flex flex-1 flex-col p-4">
+<div class="flex-1">
+<h4 class="text-lg font-bold text-text-main dark:text-white leading-tight">Combo Familiar</h4>
+<p class="mt-1 text-sm text-gray-500 dark:text-gray-400 line-clamp-2">4 Hamburguesas Clasicas + 4 Papas medianas + 1 Gaseosa 1.5L</p>
+</div>
+<div class="mt-4 flex items-center justify-between gap-3">
+<span class="text-xl font-bold text-text-main dark:text-white">S/ 49.90</span>
+<button class="flex h-10 items-center justify-center gap-2 rounded-full bg-primary px-5 text-sm font-bold text-text-main shadow-sm transition-transform active:scale-95 hover:bg-[#ebe705]">
+<span class="material-symbols-outlined text-[20px]">add</span>
+                                Agregar
+                            </button>
+</div>
+</div>
+</div>
+<!-- Product Card 4 -->
+<div class="group relative flex flex-col overflow-hidden rounded-xl bg-white dark:bg-surface-dark shadow-sm hover:shadow-md transition-shadow">
+<div class="relative aspect-[4/3] w-full overflow-hidden bg-gray-100 dark:bg-gray-800">
+<img alt="Vanilla ice cream scoop in a bowl with mint garnish" class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105" data-alt="Vanilla ice cream scoop in a bowl with mint garnish" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA_1iX6R-Lgd3gp4Y2mRKjt4oERxt7p84d371k_pMrHJNGCkzMXQ1C9oUxFPwTJqdogAXTaNbuPC4oqALkk2zTjk3UNRt63O3n2pWUp4x0TNRPBWbDggAhgKRhSipFYtY3P3E0NjzjftPCS2czNq2rAddWdkTpz0v4g0z1FCTYq76VzbyiEYEQksS3ocMHPpZeBEwkTeoymvZ81Gpa9BzgZsvuGSW4B1QhRKi_UhlyOAs4xYHVF4Q8yvNEw-A9EdxCVwZ7MYCkmEu8"/>
+</div>
+<div class="flex flex-1 flex-col p-4">
+<div class="flex-1">
+<h4 class="text-lg font-bold text-text-main dark:text-white leading-tight">Helado de Vainilla</h4>
+<p class="mt-1 text-sm text-gray-500 dark:text-gray-400 line-clamp-2">Cremoso helado artesanal con trozos de galleta.</p>
+</div>
+<div class="mt-4 flex items-center justify-between gap-3">
+<span class="text-xl font-bold text-text-main dark:text-white">S/ 8.50</span>
+<button class="flex h-10 items-center justify-center gap-2 rounded-full bg-primary px-5 text-sm font-bold text-text-main shadow-sm transition-transform active:scale-95 hover:bg-[#ebe705]">
+<span class="material-symbols-outlined text-[20px]">add</span>
+                                Agregar
+                            </button>
+</div>
+</div>
+</div>
+<!-- Product Card 5 -->
+<div class="group relative flex flex-col overflow-hidden rounded-xl bg-white dark:bg-surface-dark shadow-sm hover:shadow-md transition-shadow">
+<div class="relative aspect-[4/3] w-full overflow-hidden bg-gray-100 dark:bg-gray-800">
+<img alt="Golden crispy french fries in a paper cone" class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105" data-alt="Golden crispy french fries in a paper cone" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBQoRH9pYTfMzNZJMsm2xIBjunO_Qb1BaUfzJC3Wxrw686mCfEaZTkptlJl10FsO97G1yK-_94EKAfgDAAWE458maPGmu7gDS3bdrUbsV50CHhtOyB14SMNl3erKQeCeoV0nfy87JzxStk0IRnJI7o9fghux831I0fzO7h8CtWGjlYmjqJWgth39tk9J15QyY13c9rQFKWfodIknlxQG4Hw9k2muJrrYbaixagbJq9sfb-nmwtnJRTCOCPbi55kjBOhWiT1TXBYX7s"/>
+</div>
+<div class="flex flex-1 flex-col p-4">
+<div class="flex-1">
+<h4 class="text-lg font-bold text-text-main dark:text-white leading-tight">Papas Fritas</h4>
+<p class="mt-1 text-sm text-gray-500 dark:text-gray-400 line-clamp-2">Porción grande de papas nativas, crocantes y doradas.</p>
+</div>
+<div class="mt-4 flex items-center justify-between gap-3">
+<span class="text-xl font-bold text-text-main dark:text-white">S/ 12.00</span>
+<button class="flex h-10 items-center justify-center gap-2 rounded-full bg-primary px-5 text-sm font-bold text-text-main shadow-sm transition-transform active:scale-95 hover:bg-[#ebe705]">
+<span class="material-symbols-outlined text-[20px]">add</span>
+                                Agregar
+                            </button>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Floating Action Button (Cart) -->
+<div class="fixed bottom-[80px] left-0 right-0 z-30 px-5 pointer-events-none flex justify-center">
+<button class="pointer-events-auto flex w-full max-w-sm cursor-pointer items-center justify-between overflow-hidden rounded-full h-14 bg-primary text-text-main shadow-lg hover:shadow-xl hover:scale-[1.02] transition-all duration-200">
+<div class="flex items-center gap-3 pl-5">
+<div class="flex h-8 w-8 items-center justify-center rounded-full bg-white/30 backdrop-blur-sm">
+<span class="font-bold">2</span>
+</div>
+<span class="text-base font-bold leading-normal">Ver mi pedido</span>
+</div>
+<div class="pr-5 font-bold text-lg">
+                    S/ 23.40
+                </div>
+</button>
+</div>
+<!-- Bottom Navigation Bar -->
+<nav class="fixed bottom-0 left-0 w-full bg-white dark:bg-surface-dark border-t border-gray-100 dark:border-gray-800 pb-safe pt-2 z-20">
+<div class="flex items-center justify-around px-2 pb-2">
+<a class="flex flex-1 flex-col items-center justify-end gap-1 p-2 rounded-xl text-text-main dark:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined filled text-[24px]">restaurant_menu</span>
+<p class="text-[10px] font-bold uppercase tracking-wide">Menú</p>
+</a>
+<a class="flex flex-1 flex-col items-center justify-end gap-1 p-2 rounded-xl text-gray-400 hover:text-text-main dark:hover:text-white transition-colors" href="#">
+<span class="material-symbols-outlined text-[24px]">local_offer</span>
+<p class="text-[10px] font-medium uppercase tracking-wide">Ofertas</p>
+</a>
+<a class="flex flex-1 flex-col items-center justify-end gap-1 p-2 rounded-xl text-gray-400 hover:text-text-main dark:hover:text-white transition-colors" href="#">
+<span class="material-symbols-outlined text-[24px]">receipt_long</span>
+<p class="text-[10px] font-medium uppercase tracking-wide">Pedidos</p>
+</a>
+<a class="flex flex-1 flex-col items-center justify-end gap-1 p-2 rounded-xl text-gray-400 hover:text-text-main dark:hover:text-white transition-colors" href="#">
+<span class="material-symbols-outlined text-[24px]">account_circle</span>
+<p class="text-[10px] font-medium uppercase tracking-wide">Perfil</p>
+</a>
+</div>
+</nav>
+</div>
+</body></html>

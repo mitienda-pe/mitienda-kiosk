@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+
+<html class="light" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Pantalla de Pago</title>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Spline+Sans:wght@300;400;500;600;700&amp;family=Noto+Sans:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Theme Configuration -->
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#f9f506",
+                        "background-light": "#f8f8f5",
+                        "background-dark": "#23220f",
+                        "text-dark": "#181811",
+                        "text-light": "#f4f4f0",
+                        "subtle-dark": "#8c8b5f",
+                    },
+                    fontFamily: {
+                        "display": ["Spline Sans", "Noto Sans", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "1rem", 
+                        "lg": "1.5rem", 
+                        "xl": "2rem", 
+                        "2xl": "3rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        /* Custom styles for animations and specific UI tweaks */
+        .spinner {
+            border: 4px solid rgba(249, 245, 6, 0.1);
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            border-left-color: #f9f506;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .pulse-ring {
+            animation: pulse-ring 2s cubic-bezier(0.215, 0.61, 0.355, 1) infinite;
+        }
+
+        @keyframes pulse-ring {
+            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(249, 245, 6, 0.7); }
+            70% { transform: scale(1); box-shadow: 0 0 0 20px rgba(249, 245, 6, 0); }
+            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(249, 245, 6, 0); }
+        }
+        
+        /* Hide scrollbar for clean kiosk look */
+        ::-webkit-scrollbar {
+            width: 0px;
+            background: transparent;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="font-display bg-background-light dark:bg-background-dark text-text-dark dark:text-text-light antialiased selection:bg-primary selection:text-text-dark">
+<div class="relative flex h-full min-h-screen w-full flex-col group/design-root overflow-x-hidden">
+<!-- Header -->
+<div class="flex items-center p-4 pb-2 justify-between sticky top-0 z-10 bg-background-light/90 dark:bg-background-dark/90 backdrop-blur-md">
+<button class="text-text-dark dark:text-text-light flex size-12 shrink-0 items-center justify-center rounded-full hover:bg-gray-100 dark:hover:bg-white/10 transition-colors">
+<span class="material-symbols-outlined text-[24px]">arrow_back</span>
+</button>
+<h2 class="text-text-dark dark:text-text-light text-lg font-bold leading-tight tracking-[-0.015em] flex-1 text-center pr-12">Checkout</h2>
+</div>
+<!-- Total Amount -->
+<div class="flex flex-col items-center justify-center pt-2 pb-6 px-4">
+<span class="text-subtle-dark text-sm font-medium mb-1 uppercase tracking-wider">Total a Pagar</span>
+<h1 class="text-text-dark dark:text-text-light tracking-tight text-[40px] font-bold leading-none">S/ 45.00</h1>
+</div>
+<!-- Scrollable Content Area -->
+<div class="flex-1 flex flex-col gap-6 px-4 pb-32">
+<!-- Payment Methods -->
+<div class="flex flex-col gap-3">
+<h3 class="text-text-dark dark:text-text-light text-base font-bold px-1">Método de Pago</h3>
+<!-- Card Option (Selected) -->
+<label class="group relative flex items-center gap-4 rounded-xl border-2 border-primary bg-primary/5 p-4 cursor-pointer transition-all shadow-sm">
+<input checked="" class="peer h-5 w-5 border-2 border-[#e6e6db] bg-transparent text-transparent checked:border-text-dark checked:bg-text-dark focus:outline-none focus:ring-0 focus:ring-offset-0" name="payment_method" type="radio"/>
+<div class="flex items-center justify-center w-10 h-10 rounded-full bg-white dark:bg-white/10 text-text-dark dark:text-text-light shrink-0">
+<span class="material-symbols-outlined">credit_card</span>
+</div>
+<div class="flex grow flex-col">
+<p class="text-text-dark dark:text-text-light text-base font-bold leading-normal">Tarjeta</p>
+<p class="text-subtle-dark text-sm font-normal leading-normal">Visa, Mastercard, Amex</p>
+</div>
+<div class="absolute inset-0 rounded-xl ring-2 ring-primary opacity-0 peer-checked:opacity-100 pointer-events-none transition-opacity"></div>
+</label>
+<!-- Yape/Plin Option -->
+<label class="group relative flex items-center gap-4 rounded-xl border border-solid border-[#e6e6db] dark:border-white/10 bg-white dark:bg-white/5 p-4 cursor-pointer transition-all hover:bg-gray-50 dark:hover:bg-white/10">
+<input class="peer h-5 w-5 border-2 border-[#e6e6db] bg-transparent text-transparent checked:border-text-dark checked:bg-text-dark focus:outline-none focus:ring-0 focus:ring-offset-0" name="payment_method" type="radio"/>
+<div class="flex items-center justify-center w-10 h-10 rounded-full bg-gray-100 dark:bg-white/10 text-text-dark dark:text-text-light shrink-0">
+<span class="material-symbols-outlined">qr_code_scanner</span>
+</div>
+<div class="flex grow flex-col">
+<p class="text-text-dark dark:text-text-light text-base font-medium leading-normal">Yape / Plin</p>
+<p class="text-subtle-dark text-sm font-normal leading-normal">Escanea el código QR</p>
+</div>
+</label>
+<!-- Cash Option -->
+<label class="group relative flex items-center gap-4 rounded-xl border border-solid border-[#e6e6db] dark:border-white/10 bg-white dark:bg-white/5 p-4 cursor-pointer transition-all hover:bg-gray-50 dark:hover:bg-white/10">
+<input class="peer h-5 w-5 border-2 border-[#e6e6db] bg-transparent text-transparent checked:border-text-dark checked:bg-text-dark focus:outline-none focus:ring-0 focus:ring-offset-0" name="payment_method" type="radio"/>
+<div class="flex items-center justify-center w-10 h-10 rounded-full bg-gray-100 dark:bg-white/10 text-text-dark dark:text-text-light shrink-0">
+<span class="material-symbols-outlined">payments</span>
+</div>
+<div class="flex grow flex-col">
+<p class="text-text-dark dark:text-text-light text-base font-medium leading-normal">Efectivo</p>
+<p class="text-subtle-dark text-sm font-normal leading-normal">Billetes y monedas exactas</p>
+</div>
+</label>
+</div>
+<!-- Visual Instruction Card (Dynamic based on selection) -->
+<div class="@container">
+<div class="flex flex-col items-stretch justify-start rounded-2xl bg-white dark:bg-white/5 border border-[#e6e6db] dark:border-white/10 overflow-hidden shadow-sm">
+<!-- Instruction Image/Animation Placeholder -->
+<div class="w-full aspect-[2/1] relative bg-gray-100 dark:bg-black/20 flex items-center justify-center overflow-hidden">
+<div class="absolute inset-0 bg-[url('https://cdn.dribbble.com/users/125056/screenshots/2967566/media/e0066265780516624f8d2987158731d1.gif')] bg-cover bg-center opacity-90" data-alt="Animation of inserting a credit card into a pos terminal reader"></div>
+<!-- Overlay gradient for text readability -->
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+<div class="absolute bottom-4 left-4 text-white font-medium flex items-center gap-2">
+<span class="material-symbols-outlined animate-bounce">arrow_downward</span>
+                            Inserte tarjeta en el PinPad
+                         </div>
+</div>
+<div class="flex w-full flex-col items-stretch justify-center gap-3 p-5">
+<div class="flex items-center gap-3">
+<div class="h-8 w-8 rounded-full bg-primary/20 flex items-center justify-center text-primary dark:text-primary">
+<span class="material-symbols-outlined text-sm">info</span>
+</div>
+<p class="text-text-dark dark:text-text-light text-sm font-medium leading-tight">
+                                Siga las instrucciones en la pantalla del dispositivo de pago.
+                            </p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Sticky Footer Action -->
+<div class="fixed bottom-0 left-0 right-0 p-4 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-lg border-t border-[#e6e6db] dark:border-white/10 z-20">
+<button class="w-full cursor-pointer flex items-center justify-center gap-2 rounded-full h-14 bg-primary hover:bg-[#e6e205] active:scale-[0.98] transition-transform text-text-dark text-lg font-bold tracking-wide shadow-lg shadow-primary/20">
+<span>Pagar S/ 45.00</span>
+<span class="material-symbols-outlined">arrow_forward</span>
+</button>
+</div>
+<!-- Processing Overlay (Hidden by default, remove 'hidden' class to show) -->
+<!-- Toggle 'hidden' to test the overlay state -->
+<div class="fixed inset-0 z-50 flex flex-col items-center justify-center bg-black/60 backdrop-blur-sm hidden" id="processing-overlay">
+<div class="bg-white dark:bg-[#1a1a0f] p-8 rounded-2xl flex flex-col items-center shadow-2xl max-w-xs w-full mx-4 text-center">
+<div class="spinner mb-6 border-t-primary border-r-primary border-b-transparent border-l-transparent"></div>
+<h3 class="text-xl font-bold text-text-dark dark:text-text-light mb-2">Procesando pago</h3>
+<p class="text-subtle-dark text-sm mb-6">Por favor, no retire su tarjeta ni cierre esta ventana.</p>
+<button class="text-subtle-dark text-xs font-medium underline hover:text-text-dark dark:hover:text-text-light transition-colors">
+                    Cancelar operación
+                </button>
+</div>
+</div>
+</div>
+<!-- Script to toggle payment method active state visualization for demo purposes -->
+<script>
+        const radios = document.querySelectorAll('input[name="payment_method"]');
+        radios.forEach(radio => {
+            radio.addEventListener('change', function() {
+                // Reset all labels
+                document.querySelectorAll('label').forEach(lbl => {
+                    lbl.classList.remove('border-primary', 'bg-primary/5', 'ring-2');
+                    lbl.classList.add('border-[#e6e6db]', 'dark:border-white/10', 'bg-white', 'dark:bg-white/5');
+                    const overlay = lbl.querySelector('.absolute.inset-0');
+                    if(overlay) overlay.classList.remove('opacity-100');
+                });
+                
+                // Set active label
+                if(this.checked) {
+                    const activeLabel = this.closest('label');
+                    activeLabel.classList.remove('border-[#e6e6db]', 'dark:border-white/10', 'bg-white', 'dark:bg-white/5');
+                    activeLabel.classList.add('border-primary', 'bg-primary/5');
+                    const overlay = activeLabel.querySelector('.absolute.inset-0');
+                    if(overlay) overlay.classList.add('opacity-100');
+                }
+            });
+        });
+
+        // Simple overlay toggle demo
+        const payBtn = document.querySelector('.fixed.bottom-0 button');
+        const overlay = document.getElementById('processing-overlay');
+        
+        payBtn.addEventListener('click', () => {
+            overlay.classList.remove('hidden');
+            setTimeout(() => {
+                overlay.classList.add('hidden');
+            }, 3000); // Hide after 3 seconds for demo
+        });
+    </script>
+</body></html>
