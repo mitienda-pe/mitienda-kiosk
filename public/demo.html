@@ -12,8 +12,8 @@
     body {
       font-family: 'Inter', system-ui, sans-serif;
       background: linear-gradient(135deg, #0f0f1a 0%, #1a1a2e 40%, #16213e 70%, #0f3460 100%);
-      min-height: 100vh;
-      min-height: 100dvh;
+      height: 100vh;
+      height: 100dvh;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -21,24 +21,36 @@
       color: white;
     }
 
-    .demo-container {
+    /* Two-column layout */
+    .demo-layout {
       display: flex;
-      flex-direction: column;
       align-items: center;
-      gap: 1.5rem;
-      padding: 1.5rem;
+      gap: 4rem;
+      height: 100%;
+      padding: 1.5rem 3rem;
     }
 
-    /* Device frame */
+    /* Left: device takes max vertical space */
+    .demo-device-col {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+    }
+
+    /* Device frame — fills height, width follows 9:16 ratio */
     .device {
       position: relative;
-      width: 380px;
-      height: calc(100vh - 9rem);
-      height: calc(100dvh - 9rem);
-      max-height: 760px;
+      /* Height: fill viewport minus padding */
+      height: calc(100dvh - 3rem);
+      /* Width: proportional 9:16 */
+      aspect-ratio: 9 / 16;
+      max-height: 1040px;
       border-radius: 2.5rem;
       background: #0a0a0a;
       padding: 12px;
+      display: flex;
+      flex-direction: column;
       box-shadow:
         0 0 0 1px rgba(255, 255, 255, 0.08),
         0 0 0 3px rgba(0, 0, 0, 0.3),
@@ -47,7 +59,7 @@
         inset 0 1px 0 rgba(255, 255, 255, 0.05);
     }
 
-    /* Inner bezel with subtle gradient */
+    /* Inner bezel */
     .device::before {
       content: '';
       position: absolute;
@@ -65,6 +77,7 @@
       align-items: center;
       justify-content: center;
       height: 1.8rem;
+      flex-shrink: 0;
     }
 
     .device-camera::before {
@@ -76,7 +89,7 @@
       box-shadow: 0 0 3px rgba(0, 0, 0, 0.5), inset 0 1px 2px rgba(255, 255, 255, 0.05);
     }
 
-    /* Screen (iframe container) */
+    /* Screen (iframe) */
     .device-screen {
       position: relative;
       z-index: 1;
@@ -84,7 +97,6 @@
       border-radius: 1rem;
       overflow: hidden;
       background: #f8f8f5;
-      height: calc(100% - 3.8rem);
     }
 
     .device-screen iframe {
@@ -102,6 +114,7 @@
       align-items: center;
       justify-content: center;
       height: 2rem;
+      flex-shrink: 0;
     }
 
     .device-home::before {
@@ -112,31 +125,111 @@
       background: #333;
     }
 
-    /* Label */
-    .demo-label {
-      text-align: center;
+    /* Right: info panel */
+    .demo-info {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 2.5rem;
+      max-width: 380px;
     }
 
-    .demo-label h1 {
-      font-size: 0.95rem;
+    .demo-info .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .demo-info .brand-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, #f9f506, #e6e205);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      box-shadow: 0 4px 20px rgba(249, 245, 6, 0.2);
+    }
+
+    .demo-info .brand h1 {
+      font-size: 1.5rem;
       font-weight: 700;
-      color: rgba(255, 255, 255, 0.85);
-      letter-spacing: 0.02em;
+      color: rgba(255, 255, 255, 0.95);
+      line-height: 1.2;
     }
 
-    .demo-label p {
+    .demo-info .brand p {
+      font-size: 0.8rem;
+      color: rgba(255, 255, 255, 0.4);
+      margin-top: 0.15rem;
+    }
+
+    .demo-info .tagline {
+      font-size: 2rem;
+      font-weight: 700;
+      line-height: 1.25;
+      color: rgba(255, 255, 255, 0.9);
+    }
+
+    .demo-info .tagline span {
+      color: #f9f506;
+    }
+
+    .demo-info .features {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .demo-info .feature {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+    }
+
+    .demo-info .feature-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      flex-shrink: 0;
+    }
+
+    .demo-info .feature h3 {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: rgba(255, 255, 255, 0.85);
+      line-height: 1.3;
+    }
+
+    .demo-info .feature p {
       font-size: 0.75rem;
       color: rgba(255, 255, 255, 0.4);
-      margin-top: 0.25rem;
+      line-height: 1.4;
+      margin-top: 0.1rem;
     }
 
-    /* Ambient glow behind device */
+    .demo-info .cta {
+      font-size: 0.7rem;
+      color: rgba(255, 255, 255, 0.25);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      font-weight: 500;
+    }
+
+    /* Ambient glow */
     .device-glow {
       position: absolute;
-      width: 300px;
-      height: 300px;
+      width: 400px;
+      height: 400px;
       border-radius: 50%;
-      background: radial-gradient(circle, rgba(249, 245, 6, 0.06) 0%, transparent 70%);
+      background: radial-gradient(circle, rgba(249, 245, 6, 0.05) 0%, transparent 70%);
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
@@ -146,18 +239,66 @@
   </style>
 </head>
 <body>
-  <div class="demo-container">
-    <div class="device">
-      <div class="device-glow"></div>
-      <div class="device-camera"></div>
-      <div class="device-screen">
-        <iframe src="/" title="MiTienda Kiosk"></iframe>
+  <div class="demo-layout">
+    <!-- Left: Device -->
+    <div class="demo-device-col">
+      <div class="device">
+        <div class="device-glow"></div>
+        <div class="device-camera"></div>
+        <div class="device-screen">
+          <iframe src="/" title="MiTienda Kiosk"></iframe>
+        </div>
+        <div class="device-home"></div>
       </div>
-      <div class="device-home"></div>
     </div>
-    <div class="demo-label">
-      <h1>MiTienda Kiosk</h1>
-      <p>Totem de autoservicio — Demo interactiva</p>
+
+    <!-- Right: Info -->
+    <div class="demo-info">
+      <div class="brand">
+        <div class="brand-icon">K</div>
+        <div>
+          <h1>MiTienda Kiosk</h1>
+          <p>Totem de autoservicio</p>
+        </div>
+      </div>
+
+      <div class="tagline">
+        Pedidos sin filas.<br/>
+        <span>Sin fricciones.</span>
+      </div>
+
+      <div class="features">
+        <div class="feature">
+          <div class="feature-icon">&#x1f4f1;</div>
+          <div>
+            <h3>Pantalla tactil intuitiva</h3>
+            <p>Navegacion visual por categorias y productos</p>
+          </div>
+        </div>
+        <div class="feature">
+          <div class="feature-icon">&#x26a1;</div>
+          <div>
+            <h3>Pago QR instantaneo</h3>
+            <p>Yape, Plin, billeteras digitales</p>
+          </div>
+        </div>
+        <div class="feature">
+          <div class="feature-icon">&#x1f5a8;</div>
+          <div>
+            <h3>Ticket impreso</h3>
+            <p>Comprobante con numero de pedido al instante</p>
+          </div>
+        </div>
+        <div class="feature">
+          <div class="feature-icon">&#x1f504;</div>
+          <div>
+            <h3>Multi-tenant</h3>
+            <p>Un solo software, multiples marcas y locales</p>
+          </div>
+        </div>
+      </div>
+
+      <p class="cta">&#x2190; Interactua con la demo en vivo</p>
     </div>
   </div>
 </body>
