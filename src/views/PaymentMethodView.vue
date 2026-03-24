@@ -4,6 +4,11 @@ import { useRouter } from 'vue-router'
 import { useCartStore } from '@/stores/cart'
 import { useOrderStore, type PaymentMethod } from '@/stores/order'
 
+import logoYape from '@/assets/logo-yape.svg'
+import logoPlin from '@/assets/logo-plin.svg'
+import logoKasnet from '@/assets/logo-kasnet-2.svg'
+import logoPayme from '@/assets/logo-payme.png'
+
 const router = useRouter()
 const cart = useCartStore()
 const order = useOrderStore()
@@ -15,6 +20,8 @@ interface MethodOption {
   icon: string
   title: string
   subtitle: string
+  logos?: string[]
+  poweredBy?: { label: string; logo: string }
   tags?: string[]
 }
 
@@ -24,7 +31,8 @@ const methods: MethodOption[] = [
     icon: 'qr_code_2',
     title: 'QR — Billetera digital',
     subtitle: 'Escanea con tu celular y paga al instante',
-    tags: ['Yape', 'Plin', 'App bancaria'],
+    logos: [logoYape, logoPlin],
+    poweredBy: { label: 'Powered by', logo: logoKasnet },
   },
   {
     id: 'card',
@@ -38,7 +46,7 @@ const methods: MethodOption[] = [
     icon: 'link',
     title: 'Link de pago',
     subtitle: 'Recibe un enlace en tu celular para pagar',
-    tags: ['SMS', 'WhatsApp'],
+    poweredBy: { label: 'Powered by', logo: logoPayme },
   },
 ]
 
@@ -129,13 +137,35 @@ function formatPrice(price: number): string {
               </div>
             </div>
             <p class="text-sm text-subtle-dark mt-0.5 leading-snug">{{ method.subtitle }}</p>
-            <!-- Tags -->
+
+            <!-- Logos (Yape, Plin) -->
+            <div v-if="method.logos" class="mt-2.5 flex items-center gap-3">
+              <img
+                v-for="(logo, i) in method.logos"
+                :key="i"
+                :src="logo"
+                class="h-7 w-auto object-contain"
+                alt=""
+              />
+            </div>
+
+            <!-- Tags (Visa, MC, etc) -->
             <div v-if="method.tags" class="mt-2 flex flex-wrap gap-1.5">
               <span
                 v-for="tag in method.tags"
                 :key="tag"
                 class="rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-subtle-dark"
               >{{ tag }}</span>
+            </div>
+
+            <!-- Powered by -->
+            <div v-if="method.poweredBy" class="mt-2.5 flex items-center gap-2">
+              <span class="text-[10px] text-subtle-dark/60 uppercase tracking-wider font-medium">{{ method.poweredBy.label }}</span>
+              <img
+                :src="method.poweredBy.logo"
+                class="h-5 w-auto object-contain opacity-70"
+                alt=""
+              />
             </div>
           </div>
         </button>
