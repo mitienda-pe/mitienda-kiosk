@@ -14,7 +14,7 @@ const transitionName = ref('fade')
 const initializing = ref(true)
 
 router.beforeEach((to, from) => {
-  const routes = ['welcome', 'service', 'categories', 'menu', 'product', 'cart', 'upsell', 'payment', 'confirmation']
+  const routes = ['welcome', 'service', 'categories', 'menu', 'product', 'cart', 'upsell', 'payment-method', 'payment', 'confirmation']
   const toIndex = routes.indexOf(to.name as string)
   const fromIndex = routes.indexOf(from.name as string)
   transitionName.value = toIndex >= fromIndex ? 'slide-left' : 'slide-right'

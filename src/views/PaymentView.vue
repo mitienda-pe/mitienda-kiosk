@@ -19,7 +19,7 @@ function formatPrice(price: number): string {
 
 function cancel() {
   cleanup()
-  router.push('/cart')
+  router.push('/payment-method')
 }
 
 function cleanup() {

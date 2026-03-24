@@ -72,12 +72,12 @@ function addToCart(product: Product) {
 
 function skip() {
   cleanup()
-  router.push('/payment')
+  router.push('/payment-method')
 }
 
 function continueToPayment() {
   cleanup()
-  router.push('/payment')
+  router.push('/payment-method')
 }
 
 function cleanup() {
