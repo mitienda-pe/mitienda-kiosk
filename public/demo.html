@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MiTienda Kiosk — Demo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background: linear-gradient(135deg, #0f0f1a 0%, #1a1a2e 40%, #16213e 70%, #0f3460 100%);
+      min-height: 100vh;
+      min-height: 100dvh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      color: white;
+    }
+
+    .demo-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.5rem;
+      padding: 1.5rem;
+    }
+
+    /* Device frame */
+    .device {
+      position: relative;
+      width: 380px;
+      height: calc(100vh - 9rem);
+      height: calc(100dvh - 9rem);
+      max-height: 760px;
+      border-radius: 2.5rem;
+      background: #0a0a0a;
+      padding: 12px;
+      box-shadow:
+        0 0 0 1px rgba(255, 255, 255, 0.08),
+        0 0 0 3px rgba(0, 0, 0, 0.3),
+        0 30px 80px rgba(0, 0, 0, 0.6),
+        0 0 100px rgba(249, 245, 6, 0.04),
+        inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    }
+
+    /* Inner bezel with subtle gradient */
+    .device::before {
+      content: '';
+      position: absolute;
+      inset: 3px;
+      border-radius: 2.3rem;
+      background: linear-gradient(180deg, #1a1a1a 0%, #111 100%);
+      z-index: 0;
+    }
+
+    /* Camera notch */
+    .device-camera {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 1.8rem;
+    }
+
+    .device-camera::before {
+      content: '';
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: radial-gradient(circle, #2a2a3a 30%, #1a1a2a 70%);
+      box-shadow: 0 0 3px rgba(0, 0, 0, 0.5), inset 0 1px 2px rgba(255, 255, 255, 0.05);
+    }
+
+    /* Screen (iframe container) */
+    .device-screen {
+      position: relative;
+      z-index: 1;
+      flex: 1;
+      border-radius: 1rem;
+      overflow: hidden;
+      background: #f8f8f5;
+      height: calc(100% - 3.8rem);
+    }
+
+    .device-screen iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      display: block;
+    }
+
+    /* Home indicator */
+    .device-home {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 2rem;
+    }
+
+    .device-home::before {
+      content: '';
+      width: 36%;
+      height: 4px;
+      border-radius: 2px;
+      background: #333;
+    }
+
+    /* Label */
+    .demo-label {
+      text-align: center;
+    }
+
+    .demo-label h1 {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: rgba(255, 255, 255, 0.85);
+      letter-spacing: 0.02em;
+    }
+
+    .demo-label p {
+      font-size: 0.75rem;
+      color: rgba(255, 255, 255, 0.4);
+      margin-top: 0.25rem;
+    }
+
+    /* Ambient glow behind device */
+    .device-glow {
+      position: absolute;
+      width: 300px;
+      height: 300px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(249, 245, 6, 0.06) 0%, transparent 70%);
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+      z-index: -1;
+    }
+  </style>
+</head>
+<body>
+  <div class="demo-container">
+    <div class="device">
+      <div class="device-glow"></div>
+      <div class="device-camera"></div>
+      <div class="device-screen">
+        <iframe src="/" title="MiTienda Kiosk"></iframe>
+      </div>
+      <div class="device-home"></div>
+    </div>
+    <div class="demo-label">
+      <h1>MiTienda Kiosk</h1>
+      <p>Totem de autoservicio — Demo interactiva</p>
+    </div>
+  </div>
+</body>
+</html>
