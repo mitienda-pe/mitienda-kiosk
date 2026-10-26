@@ -137,3 +137,77 @@
   background-repeat: repeat-x;
   height: 20px;
 }
+
+/* Ticket impreso del pedido (impresora térmica de 80 mm). En pantalla no se
+   ve; al imprimir, es lo único que sale. */
+.print-ticket {
+  display: none;
+}
+
+@media print {
+  @page {
+    size: 80mm auto;
+    margin: 0;
+  }
+
+  html, body {
+    height: auto !important;
+    overflow: visible !important;
+    background: #fff !important;
+  }
+
+  body * {
+    visibility: hidden;
+  }
+
+  .print-ticket,
+  .print-ticket * {
+    visibility: visible;
+  }
+
+  .print-ticket {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 72mm;
+    padding: 3mm 4mm;
+    color: #000;
+    font-family: ui-monospace, Menlo, Consolas, monospace;
+    font-size: 11px;
+    line-height: 1.35;
+    text-align: center;
+  }
+
+  .print-ticket hr {
+    border: 0;
+    border-top: 1px dashed #000;
+    margin: 2mm 0;
+  }
+
+  .print-ticket table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+  }
+
+  .print-ticket td {
+    vertical-align: top;
+    padding: 0.5mm 0;
+  }
+
+  .print-ticket .pt-amount {
+    text-align: right;
+    white-space: nowrap;
+    padding-left: 2mm;
+  }
+
+  .print-ticket .pt-store { font-size: 13px; font-weight: 700; }
+  .print-ticket .pt-label { font-size: 11px; letter-spacing: 2px; }
+  .print-ticket .pt-code { font-size: 34px; font-weight: 700; line-height: 1.1; }
+  .print-ticket .pt-total td { font-size: 13px; font-weight: 700; }
+  .print-ticket .pt-strong { font-weight: 700; margin-top: 1mm; }
+  .print-ticket .pt-muted { font-size: 10px; }
+  .print-ticket .pt-barcode { margin: 3mm 0 1mm; }
+  .print-ticket .pt-barcode svg { max-width: 100%; height: auto; }
+}

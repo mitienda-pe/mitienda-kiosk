@@ -15,7 +15,7 @@ const heroImage = import.meta.env.VITE_HERO_IMAGE || heroFallback
 function start() {
   cart.clear()
   order.reset()
-  router.push('/service')
+  router.push('/categories')
 }
 </script>
 
@@ -48,9 +48,6 @@ function start() {
         </div>
       </div>
 
-      <div class="flex items-center gap-2 rounded-full bg-white/10 backdrop-blur-md px-4 py-2">
-        <span class="text-xs font-medium text-white/90">Español</span>
-      </div>
     </div>
 
     <!-- Center content -->
@@ -64,26 +61,23 @@ function start() {
           Toca para ordenar
         </h1>
         <p class="text-lg text-white/70 font-light">
-          Haz tu pedido en segundos
+          Arma tu pedido y paga en caja con tu ticket
         </p>
       </div>
     </div>
 
     <!-- Bottom section -->
     <div class="relative z-20 px-8 pb-10">
-      <!-- Payment methods decorative -->
-      <div class="flex items-center justify-center gap-6 mb-6">
+      <!-- Cómo funciona: el pago es en caja -->
+      <div class="flex items-center justify-center gap-3 mb-6">
         <div class="flex items-center gap-2 rounded-full bg-white/10 backdrop-blur-sm px-4 py-2">
-          <span class="text-xs font-medium text-white/80">Yape</span>
+          <span class="material-symbols-outlined text-white/80 text-[18px]">touch_app</span>
+          <span class="text-xs font-medium text-white/80">Pide aquí</span>
         </div>
+        <span class="material-symbols-outlined text-white/40 text-[18px]">arrow_forward</span>
         <div class="flex items-center gap-2 rounded-full bg-white/10 backdrop-blur-sm px-4 py-2">
-          <span class="text-xs font-medium text-white/80">Plin</span>
-        </div>
-        <div class="flex items-center gap-2 rounded-full bg-white/10 backdrop-blur-sm px-4 py-2">
-          <span class="text-xs font-medium text-white/80">Visa</span>
-        </div>
-        <div class="flex items-center gap-2 rounded-full bg-white/10 backdrop-blur-sm px-4 py-2">
-          <span class="text-xs font-medium text-white/80">MC</span>
+          <span class="material-symbols-outlined text-white/80 text-[18px]">receipt_long</span>
+          <span class="text-xs font-medium text-white/80">Paga en caja</span>
         </div>
       </div>
 

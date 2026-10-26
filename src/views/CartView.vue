@@ -1,11 +1,16 @@
 <script setup lang="ts">
+import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { useCartStore } from '@/stores/cart'
-import { useTenantStore } from '@/stores/tenant'
+import { useOrderStore } from '@/stores/order'
+import { PreorderRejected } from '@/services/api'
 
 const router = useRouter()
 const cart = useCartStore()
-const tenant = useTenantStore()
+const order = useOrderStore()
+
+const error = ref<string | null>(null)
+const unavailable = ref<string[]>([])
 
 function formatPrice(price: number): string {
   return `S/ ${price.toFixed(2)}`
@@ -15,9 +20,38 @@ function goBack() {
   router.push('/menu')
 }
 
-function goToPayment() {
-  if (!cart.isEmpty) {
-    router.push('/upsell')
+/**
+ * Registra el pedido. Si algo se agotó mientras el cliente elegía, se ajusta
+ * el carrito a lo disponible y se le avisa antes de reintentar.
+ */
+async function confirmOrder() {
+  if (cart.isEmpty || order.submitting) return
+  error.value = null
+  unavailable.value = []
+
+  try {
+    await order.submit()
+    router.push('/confirmation')
+  } catch (e) {
+    if (e instanceof PreorderRejected) {
+      if (e.unavailable.length) {
+        for (const item of e.unavailable) {
+          const id = item.productoatributo_id ? `${item.product_id}-${item.productoatributo_id}` : String(item.product_id)
+          if (item.available > 0) {
+            const line = cart.items.find(i => i.id === id)
+            if (line) line.quantity = item.available
+          } else {
+            cart.removeItem(id)
+          }
+          unavailable.value.push(item.available > 0 ? `${item.name}: solo quedan ${item.available}` : `${item.name}: agotado`)
+        }
+        error.value = 'Ajustamos tu pedido porque algunos productos ya no tienen stock.'
+      } else {
+        error.value = e.message
+      }
+    } else {
+      error.value = 'No pudimos registrar tu pedido. Inténtalo otra vez o acércate a caja.'
+    }
   }
 }
 </script>
@@ -44,12 +78,12 @@ function goToPayment() {
         <span class="material-symbols-outlined text-[48px] text-gray-300">shopping_cart</span>
       </div>
       <h2 class="text-xl font-bold mb-2">Tu pedido está vacío</h2>
-      <p class="text-subtle-dark text-center mb-8">Agrega productos del menú para comenzar</p>
+      <p class="text-subtle-dark text-center mb-8">Agrega productos para comenzar</p>
       <button
         @click="goBack"
         class="rounded-full bg-primary px-8 py-3.5 font-semibold text-text-main active:scale-95 transition-transform shadow-sm"
       >
-        Ver menú
+        Ver productos
       </button>
     </div>
 
@@ -71,7 +105,7 @@ function goToPayment() {
                 class="h-full w-full object-cover"
               />
               <div v-else class="flex h-full w-full items-center justify-center">
-                <span class="material-symbols-outlined text-gray-300">fastfood</span>
+                <span class="material-symbols-outlined text-gray-300">image</span>
               </div>
             </div>
 
@@ -117,34 +151,28 @@ function goToPayment() {
 
       <!-- Totals & CTA -->
       <div class="border-t border-gray-100 bg-white px-6 pt-5 pb-8">
-        <!-- Order type badge -->
-        <div class="flex items-center gap-2 mb-4">
-          <span class="material-symbols-outlined text-[18px] text-subtle-dark">shopping_bag</span>
-          <span class="text-sm text-subtle-dark font-medium">Para llevar</span>
-        </div>
-
-        <div class="space-y-2 mb-5">
-          <div class="flex justify-between text-sm">
-            <span class="text-subtle-dark">Subtotal</span>
-            <span class="font-medium">{{ formatPrice(cart.subtotal) }}</span>
-          </div>
-          <div class="flex justify-between text-sm">
-            <span class="text-subtle-dark">IGV (18%)</span>
-            <span class="font-medium">{{ formatPrice(cart.igv) }}</span>
-          </div>
-          <div class="h-px bg-gray-100 my-2"></div>
+        <div class="mb-5">
           <div class="flex justify-between">
             <span class="text-base font-bold">Total</span>
             <span class="text-lg font-bold">{{ formatPrice(cart.total) }}</span>
           </div>
+          <p class="mt-1 text-xs text-subtle-dark">Pagas en caja con el ticket que vas a recibir.</p>
+        </div>
+
+        <div v-if="error" class="mb-4 rounded-2xl bg-red-50 px-4 py-3 text-sm text-red-700">
+          <p class="font-semibold">{{ error }}</p>
+          <ul v-if="unavailable.length" class="mt-1 list-disc pl-5">
+            <li v-for="line in unavailable" :key="line">{{ line }}</li>
+          </ul>
         </div>
 
         <button
-          @click="goToPayment"
-          class="flex w-full items-center justify-center gap-2 rounded-2xl bg-primary py-4 font-bold text-text-main text-lg shadow-lg shadow-primary/30 active:scale-[0.98] transition-transform"
+          @click="confirmOrder"
+          :disabled="order.submitting || cart.isEmpty"
+          class="flex w-full items-center justify-center gap-2 rounded-2xl bg-primary py-4 font-bold text-text-main text-lg shadow-lg shadow-primary/30 active:scale-[0.98] transition-transform disabled:opacity-60"
         >
-          <span class="material-symbols-outlined">payment</span>
-          Ir a pagar — {{ formatPrice(cart.total) }}
+          <span class="material-symbols-outlined">{{ order.submitting ? 'hourglass_top' : 'receipt_long' }}</span>
+          {{ order.submitting ? 'Registrando pedido…' : `Confirmar pedido — ${formatPrice(cart.total)}` }}
         </button>
 
         <button

@@ -1,38 +1,14 @@
 <script setup lang="ts">
-import { onMounted, ref } from 'vue'
+import { onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { useCatalogStore } from '@/stores/catalog'
 import { useCartStore } from '@/stores/cart'
 import { useTenantStore } from '@/stores/tenant'
-import { fetchCatalog } from '@/services/api'
 
 const router = useRouter()
 const catalog = useCatalogStore()
 const cart = useCartStore()
 const tenant = useTenantStore()
-
-// Map category slug → first product image URL
-const categoryImages = ref<Record<string, string>>({})
-
-async function loadCategoryImages() {
-  const cats = catalog.categories
-  if (!cats.length || !tenant.tiendaId) return
-
-  // Fetch first product per category in parallel
-  const promises = cats.map(async (cat) => {
-    try {
-      const data = await fetchCatalog(tenant.tiendaId, { categoria: cat.slug, limit: 1 })
-      const firstProduct = data.products[0]
-      if (firstProduct?.images?.length) {
-        categoryImages.value[cat.slug] = firstProduct.images[0].url || firstProduct.images[0].thumbnail
-      }
-    } catch {
-      // ignore - card will show gradient fallback
-    }
-  })
-
-  await Promise.all(promises)
-}
 
 // Fallback gradient colors
 const categoryColors = [
@@ -50,17 +26,12 @@ function getCategoryColor(index: number): string {
   return categoryColors[index % categoryColors.length]
 }
 
-function getImage(cat: typeof catalog.categories[0]): string | null {
-  // Priority: category's own image → first product image → null
-  return cat.image || cat.square_r2_url || cat.cover_r2_url || categoryImages.value[cat.slug] || null
-}
-
-function goToCategory(slug: string) {
-  router.push({ name: 'menu', params: { categorySlug: slug } })
+function goToCategory(id: string) {
+  router.push({ name: 'menu', params: { categoryId: id } })
 }
 
 function goBack() {
-  router.push('/service')
+  router.push('/')
 }
 
 function goToCart() {
@@ -71,13 +42,7 @@ function formatPrice(price: number): string {
   return `S/ ${price.toFixed(2)}`
 }
 
-onMounted(async () => {
-  if (catalog.categories.length === 0) {
-    await catalog.loadCategories()
-  }
-  // Load first product image per category
-  await loadCategoryImages()
-})
+onMounted(() => catalog.load())
 </script>
 
 <template>
@@ -117,7 +82,7 @@ onMounted(async () => {
     </div>
 
     <!-- Loading -->
-    <div v-if="catalog.loading && catalog.categories.length === 0" class="flex flex-1 items-center justify-center">
+    <div v-if="catalog.loading && catalog.visibleCategories.length === 0" class="flex flex-1 items-center justify-center">
       <div class="flex flex-col items-center gap-3">
         <div class="h-10 w-10 animate-spin rounded-full border-4 border-primary border-t-transparent"></div>
         <p class="text-sm text-subtle-dark">Cargando categorías...</p>
@@ -128,15 +93,15 @@ onMounted(async () => {
     <div v-else class="flex-1 overflow-y-auto hide-scrollbar px-4 pb-32">
       <div class="grid grid-cols-2 gap-3">
         <button
-          v-for="(cat, index) in catalog.categories"
+          v-for="(cat, index) in catalog.visibleCategories"
           :key="cat.id"
-          @click="goToCategory(cat.slug)"
+          @click="goToCategory(cat.id)"
           class="relative flex flex-col items-end justify-end overflow-hidden rounded-2xl shadow-sm active:scale-[0.97] transition-transform aspect-square"
         >
           <!-- Background: product image or gradient fallback -->
-          <div v-if="getImage(cat)" class="absolute inset-0">
+          <div v-if="cat.image" class="absolute inset-0">
             <img
-              :src="getImage(cat)!"
+              :src="cat.image"
               :alt="cat.name"
               class="h-full w-full object-cover"
             />
@@ -158,14 +123,18 @@ onMounted(async () => {
         </button>
       </div>
 
-      <!-- View all products link -->
-      <button
-        @click="router.push({ name: 'menu' })"
-        class="mt-4 flex w-full items-center justify-center gap-2 rounded-2xl border-2 border-gray-200 py-4 font-semibold text-subtle-dark active:scale-[0.98] transition-transform"
-      >
-        <span class="material-symbols-outlined outlined text-[20px]">grid_view</span>
-        Ver todos los productos
-      </button>
+      <!-- Sin productos publicados para el kiosko -->
+      <div v-if="!catalog.loading && catalog.visibleCategories.length === 0" class="flex flex-col items-center justify-center py-20 text-center">
+        <span class="material-symbols-outlined text-[56px] text-gray-200 mb-3">inventory_2</span>
+        <p class="text-subtle-dark">{{ catalog.error || 'Por ahora no hay productos disponibles en este kiosko.' }}</p>
+        <button
+          v-if="catalog.error"
+          @click="catalog.load(true)"
+          class="mt-5 rounded-full bg-primary px-6 py-3 font-semibold text-text-main active:scale-95 transition-transform"
+        >
+          Reintentar
+        </button>
+      </div>
     </div>
 
     <!-- Floating cart bar -->

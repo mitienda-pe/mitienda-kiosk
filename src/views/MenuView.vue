@@ -1,12 +1,12 @@
 <script setup lang="ts">
-import { onMounted, ref, computed, watch } from 'vue'
+import { onMounted, ref, computed } from 'vue'
 import { useRouter } from 'vue-router'
 import { useCatalogStore } from '@/stores/catalog'
 import { useCartStore } from '@/stores/cart'
 import { useTenantStore } from '@/stores/tenant'
 import type { Product } from '@/services/api'
 
-const props = defineProps<{ categorySlug?: string }>()
+const props = defineProps<{ categoryId?: string }>()
 
 const router = useRouter()
 const catalog = useCatalogStore()
@@ -16,27 +16,23 @@ const tenant = useTenantStore()
 const poppedId = ref<string | null>(null)
 
 const allCategories = computed(() => [
-  { id: '0', name: 'Todos', slug: '' },
-  ...catalog.categories,
+  { id: '', name: 'Todos' },
+  ...catalog.visibleCategories,
 ])
 
 const displayProducts = computed(() => catalog.products)
 
 onMounted(async () => {
-  if (props.categorySlug) {
-    catalog.selectCategory(props.categorySlug)
-  }
-  await catalog.loadCatalog(props.categorySlug)
+  catalog.selectCategory(props.categoryId || null)
+  await catalog.load()
 })
 
-function selectCategory(slug: string | null) {
-  catalog.selectCategory(slug || null)
-  // Always re-fetch from API with the category filter
-  catalog.loadCatalog(slug || undefined)
+function selectCategory(id: string | null) {
+  catalog.selectCategory(id || null)
 }
 
 function openProduct(product: Product) {
-  router.push({ name: 'product', params: { slug: product.slug } })
+  router.push({ name: 'product', params: { slug: product.id } })
 }
 
 function addToCart(product: Product) {
@@ -103,10 +99,10 @@ function goToCart() {
         <button
           v-for="cat in allCategories"
           :key="cat.id"
-          @click="selectCategory(cat.slug || null)"
+          @click="selectCategory(cat.id || null)"
           class="flex h-10 shrink-0 items-center justify-center rounded-full px-5 text-sm font-semibold transition-all active:scale-95"
           :class="[
-            (cat.slug || null) === catalog.selectedCategory
+            (cat.id || null) === catalog.selectedCategory
               ? 'bg-primary text-text-main shadow-sm'
               : 'bg-white text-subtle-dark'
           ]"
@@ -120,7 +116,7 @@ function goToCart() {
     <div v-if="catalog.loading" class="flex flex-1 items-center justify-center">
       <div class="flex flex-col items-center gap-3">
         <div class="h-10 w-10 animate-spin rounded-full border-4 border-primary border-t-transparent"></div>
-        <p class="text-sm text-subtle-dark">Cargando menú...</p>
+        <p class="text-sm text-subtle-dark">Cargando productos...</p>
       </div>
     </div>
 
@@ -130,7 +126,7 @@ function goToCart() {
         <span class="material-symbols-outlined text-[48px] text-gray-300 mb-3">error_outline</span>
         <p class="text-subtle-dark mb-4">{{ catalog.error }}</p>
         <button
-          @click="catalog.loadCatalog()"
+          @click="catalog.load(true)"
           class="rounded-full bg-primary px-6 py-3 font-semibold text-text-main active:scale-95 transition-transform"
         >
           Reintentar
